@@ -3,7 +3,7 @@
 In this _Advanced Demo_ you will be implementing a serverless reminder application.
 The application will load from an S3 bucket and run in browser
 .. communicating with Lambda and Step functions via an API Gateway Endpoint
-Using the application you will be able to configure reminders for 'pet cuddles' to be send using email and SMS.
+Using the application you will be able to configure reminders for 'pet cuddles' to be sent using email.
 
 This advanced demo consists of 6 stages :-
 
@@ -15,7 +15,7 @@ This advanced demo consists of 6 stages :-
 - STAGE 6 : Cleanup the account
 
 # STAGE1 VIDEO GUIDE 
-[STAGE1 VIDEO GUIDE](https://youtu.be/4bCv6gGE6yQ)
+[STAGE1 VIDEO GUIDE](https://youtu.be/ZSt1w_7sVvY)
 
 # STAGE 1A - VERIFY SES APPLICATION SENDING EMAIL ADDRESS
 
@@ -51,37 +51,7 @@ You will receive an email to this address containing a link to click
 Click that link   
 You should see a `Congratulations!` message  
 Return to the SES console and refresh your browser, the verification status should now be `verified`  
-Record this address somewhere save as the `PetCuddleOTron Customer Address`  
-
-# STAGE 1C - Verify an SMS number
-
-Move to the SNS Console https://us-east-1.console.aws.amazon.com/sns/v3/home?region=us-east-1#/dashboard  
-Click the 'Hamburger' menu icon on the left.  
-Click `Text Messaging (SMS)` under `Mobile`.  
-Scroll down and in `Sandbox destination phone numbers` click `Add phone number`.  
-Enter the international number format of a phone number you control.  
-Pick the `verification message language` you want to use. 
-Click `Add phone Number`.  
-**if you get an error here saying `no origination entities available to send`, click `Cancel` and skip to Stage 1D**  
-you will recieve a verification number on your phone, enter it onto the `Verification code` box and click `Verify phone number`.  
-
-
-# STAGE 1D - Verify an SMS Number (US and other countries requiring an origination number)  
-Click `Origination numbers` under `Mobile` or move to `Pinpoint` console in a new tab, and click `phone numbers` under `SMS and Voice`. 
-Click `Request phone number`.  
-Choose the country of your phone number in the `Country` dropdown.  
-Select `Toll-free` from `number type`.  
-for `Default message type` pick `Transactional`.  
-Scroll down, click `Next` then `Request`.  
-
-Move back to the `SNS Console` https://us-east-1.console.aws.amazon.com/sns/v3/home?region=us-east-1#/dashboard  
-Click the 'Hamburger' menu icon on the left.   
-Click `Text Messaging (SMS)` under `Mobile`.   
-Scroll down and in `Sandbox destination phone numbers` click `Add phone number`.   
-Enter the international number format of a phone number you control.   
-Pick the `verification message language` you want to use.  
-Click `Add phone Number`.   
-you will recieve a verification number on your phone, enter it onto the `Verification code` box and click `Verify phone number`.  
+Record this address somewhere save as the `PetCuddleOTron Customer Address`   
 
 # STAGE 1 - FINISH   
 
@@ -89,7 +59,5 @@ At this point you have whitelisted 2 email addresses for use with SES.
 
 - the `PetCuddleOTron Sending Address`. 
 - the `PetCuddleOTron Customer Address`. 
-
-You have also configured an SMS number within SNS and if required an origination number in Amazon Pinpoint.  
 
 These will be configured and used by the application in later stages. AT this point you have finished all the tasks needed in this STAGE of the Advanced Demo Lesson

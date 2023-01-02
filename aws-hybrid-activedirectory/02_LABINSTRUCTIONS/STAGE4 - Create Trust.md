@@ -6,9 +6,26 @@ It will allow you to grant access to the resources of one, from the other.
 
 # STAGE 4A - ONPREM Ensure That Kerberos Pre-authentication Is Enabled
 
-Connect to the JumpBox  (THE SIMULATED ONPREM ONE, NOT AWS)
-Connect to the Client Instance  
-Load Active Directory Users and Computers  
+Connect to JumpBox (**THE SIMULATED ONPREM ONE, NOT AWS**)  
+You should still have a connection open using remote desktop to JUMPBOX and from there to CLIENT. If you dont, follow the instructions below:  
+
+```
+Open https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:sort=tag:Name
+Select JumpBox
+Locate the Public DNS (IPv4) for the Jumpbox and note down the DNS name
+Right Click and Select Connect Click 'RDP Client'
+Note down the username it should be Administrator (note this down as JumpBox Username)
+Click on Get Password
+Click on Choose file
+Locate the A4L.pem file you downloaded earlier and click Open
+Click on Decrypt Password and note down the password as JumpBox Password
+
+Connect to JUMPBOX using the username `Administrator` and the password you decrypted above.  
+From the JumpBox connect to the client instance using its private IP.  
+...If you are connecting again, login as admin@ad.animals4life.org and the admin password you picked right at the start. 
+```
+
+From the CLIENT server, Load Active Directory Users and Computers  
 Select Users 
 Click Admin  
 Right click , properties  
@@ -17,12 +34,12 @@ Make sure `Do not require Kerberos preauthentication` is UNCHECKED
 
 # STAGE 4B - ONPREM Configure DNS Conditional Forwarders for ONPREM  
 
-OPen https://console.aws.amazon.com/directoryservicev2/home?region=us-east-1#!/directories  
+Open https://console.aws.amazon.com/directoryservicev2/home?region=us-east-1#!/directories  
 Select the managed microsoft AD  
 Note down the `DNS Addresses` (2 IPs)  
 Note down `Directory DNS Name`  
 
-On the ONPREM Jumpbox  
+On the CLIENT MACHINE, still connected via the ONPREM Jumpbox  
 Click windows button  
 Type DNS  
 Open the DNS Management App  
@@ -66,8 +83,8 @@ Make sure `Do not require Kerberos preauthentication` is UNCHECKED
 
 # STAGE 4E - Configure the Trust in Your On-Premises Active Directory
 
-Connect to the JumpBox  
-Connect to the Client Instance  
+Either return to, or reconnect to JumpBox (**the onpremises one, NOT JUMPBOX-AWS**)
+Connect to the Client Instance (you should still be connected if not, make sure you login as admin@ad.animals4life.org)   
 open `Active Directory Domains and Trusts.`  
 Right click `ad.animals4life.org` and click `properties`  
 Click `Trusts`  
@@ -123,13 +140,15 @@ Select `ad.animals4life.org` (on prem domain)
 Click `OK`  
 Type `Admin`  
 Click `Check Names`  
+(**if you are prompted for login credentials**)  
+Enter `admin@ad.animals4life.org` and `YOUR_DOMAIN_ADMIN_PASSWORD` for enter network credentials
 Make sure the line with Logon Name `Admin` is selected  
 Click `OK`, `OK`, `OK`   
 The On prem admin user is now an Admin of the AWS Directory  
 This is using the trust  
 
-Logoff the JumpBox-AWS  
-Login as `admin@ad.animals4life.org`  
+Logoff the JumpBox-AWS, right now you are logged in using the AWS credentials admin@aws.animals4life.org    
+Login as `admin@ad.animals4life.org` (so you are logging into an AWS side server, using on-premises credentials)  
 
 Works!!  
 
